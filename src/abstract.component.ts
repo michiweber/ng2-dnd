@@ -2,7 +2,7 @@
 // This project is licensed under the terms of the MIT license.
 // https://github.com/akserg/ng2-dnd
 
-import {Injectable, ChangeDetectorRef, ViewRef} from '@angular/core';
+import { Injectable, ChangeDetectorRef, ViewRef, OnInit } from '@angular/core';
 import {ElementRef} from '@angular/core';
 
 import { DragDropConfig, DragImage } from './dnd.config';
@@ -28,6 +28,10 @@ export abstract class AbstractComponent {
     set dragEnabled(enabled: boolean) {
         this._dragEnabled = !!enabled;
         this._elem.draggable = this._dragEnabled;
+        const style = this._elem.getAttribute('style');
+        if (style.indexOf('-webkit-user-drag') === -1) {
+          this._elem.setAttribute('style',  + '-webkit-user-drag: ' + (this._dragEnabled ? 'element' : 'none'));
+        }
     }
     get dragEnabled(): boolean {
         return this._dragEnabled;
@@ -99,19 +103,28 @@ export abstract class AbstractComponent {
         this._elem = elemRef.nativeElement;
         this._elem.style.cursor = this._defaultCursor;  // set default cursor on our element
         //
+        // PREVENT TOUCH MOVE DEFAULT
+        //
+        this._elem.ontouchmove = (event: Event) => {
+          event.preventDefault();
+        };
+        //
         // DROP events
         //
         this._elem.ondragenter = (event: Event) => {
+            event.preventDefault();
             this._onDragEnter(event);
+            return true;
         };
         this._elem.ondragover = (event: DragEvent) => {
+            event.preventDefault();
             this._onDragOver(event);
             //
             if (event.dataTransfer != null) {
                 event.dataTransfer.dropEffect = this._config.dropEffect.name;
             }
 
-            return false;
+            return true;
         };
         this._elem.ondragleave = (event: Event) => {
             this._onDragLeave(event);
