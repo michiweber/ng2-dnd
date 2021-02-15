@@ -1,4 +1,4 @@
-// Copyright (C) 2016-2018 Sergey Akopkokhyants
+// Copyright (C) 2016-2020 Sergey Akopkokhyants
 // This project is licensed under the terms of the MIT license.
 // https://github.com/akserg/ng2-dnd
 
@@ -134,6 +134,8 @@ export class SortableComponent extends AbstractComponent {
         this.dropEnabled = !!value;
     }
 
+    @Input() dropListener: EventEmitter<any>;
+
     /**
      * The data that has to be dragged. It can be any JS object
      */
@@ -210,6 +212,9 @@ export class SortableComponent extends AbstractComponent {
         this._dragDropService.onDragSuccessCallback = null;
         //
         this.onDragEndCallback.emit(this._dragDropService.dragData);
+        if (!!this.dropListener) {
+            this.dropListener.emit(this._dragDropService.dragData);
+        }
     }
 
     _onDragEnterCallback(event: Event) {
