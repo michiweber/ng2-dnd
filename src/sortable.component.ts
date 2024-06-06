@@ -134,8 +134,6 @@ export class SortableComponent extends AbstractComponent {
         this.dropEnabled = !!value;
     }
 
-    @Input() dropListener: EventEmitter<any>;
-
     /**
      * The data that has to be dragged. It can be any JS object
      */
@@ -154,6 +152,8 @@ export class SortableComponent extends AbstractComponent {
     @Input("effectCursor") set effectcursor(value: string) {
         this.effectCursor = value;
     }
+
+    @Input() dropListener: EventEmitter<any>;
 
     /**
      * Callback function called when the drag action ends with a valid drop action.
