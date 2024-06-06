@@ -1,5 +1,5 @@
 {
-  "name": "ng2-dnd",
+  "name": "ng2-dnd-fixed",
   "description": "Angular 2 Drag-and-Drop without dependencies",
   "version": "9.0.0-beta2",
   "scripts": {
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/akserg/ng2-dnd.git"
+    "url": "https://github.com/michiweber/ng2-dnd.git"
   },
   "keywords": [
     "angular",
@@ -21,15 +21,15 @@
     "drop",
     "drag-and-drop"
   ],
-  "author": "Sergey Akopkokhyants <akserg@gmail.com>",
+  "author": "Sergey Akopkokhyants <michiweber@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/akserg/ng2-dnd/issues"
+    "url": "https://github.com/michiweber/ng2-dnd/issues"
   },
   "main": "./bundles/ng2-dnd.umd.js",
   "module": "./ng2-dnd.es5.js",
   "typings": "./ng2-dnd.d.ts",
-  "homepage": "https://github.com/akserg/ng2-dnd#readme",
+  "homepage": "https://github.com/michiweber/ng2-dnd#readme",
   "peerDependencies": {
     "@angular/core": "^18.0.0",
     "@angular/forms": "^18.0.2"
